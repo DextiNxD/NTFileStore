@@ -124,10 +124,8 @@ async def main(bot: Client, message: Message):
                                      disable_web_page_preview=True)
             return
 
-        if Config.OTHER_USERS_CAN_SAVE_FILE is True:
-            return
-
-        await message.reply_text(
+        if Config.OTHER_USERS_CAN_SAVE_FILE is False:
+            await message.reply_text(
             text="**Choose an option from below:**",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Save in Batch", callback_data="addToBatchTrue")],
@@ -136,6 +134,9 @@ async def main(bot: Client, message: Message):
             quote=True,
             disable_web_page_preview=True
         )
+            return
+
+        
     elif message.chat.type == "channel":
         if (message.chat.id == int(Config.LOG_CHANNEL)) or (message.chat.id == int(Config.UPDATES_CHANNEL)) or message.forward_from_chat or message.forward_from:
             return
