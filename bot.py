@@ -125,7 +125,9 @@ async def main(bot: Client, message: Message):
             return
 
         if Config.OTHER_USERS_CAN_SAVE_FILE is False:
-            await message.reply_text(
+            
+            return
+        await message.reply_text(
             text="**Choose an option from below:**",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("Save in Batch", callback_data="addToBatchTrue")],
@@ -134,7 +136,6 @@ async def main(bot: Client, message: Message):
             quote=True,
             disable_web_page_preview=True
         )
-            return
 
         
     elif message.chat.type == "channel":
@@ -149,7 +150,7 @@ async def main(bot: Client, message: Message):
         try:
             forwarded_msg = await message.forward(Config.DB_CHANNEL)
             file_er_id = str(forwarded_msg.message_id)
-            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=AbirHasan2005_{str_to_b64(file_er_id)}"
+            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=NetflixTudum_{str_to_b64(file_er_id)}"
             CH_edit = await bot.edit_message_reply_markup(message.chat.id, message.message_id,
                                                           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "Get Sharable Link", url=share_link)]]))
